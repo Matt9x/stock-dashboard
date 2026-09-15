@@ -1,0 +1,27 @@
+{
+  "V1": {
+    "lambda": 0.1,
+    "half_life": 60,
+    "validation_rank_ic": -0.0851490634594129
+  },
+  "V2": {
+    "lambda": 0.1,
+    "half_life": 60,
+    "validation_rank_ic": -0.0851490634594129
+  },
+  "V3": {
+    "lambda": 0.1,
+    "half_life": 60,
+    "validation_rank_ic": -0.0851490634594129
+  },
+  "V4": {
+    "lambda": 0.1,
+    "half_life": 60,
+    "validation_rank_ic": -0.0851490634594129
+  },
+  "V5": {
+    "lambda": 0.1,
+    "half_life": 60,
+    "validation_rank_ic": -0.0851490634594129
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "planning documents and read-only audit, not implementation acceptance",
+  "links_checked_files": 8,
+  "missing_links": [],
+  "audit_input_hashes_match": true,
+  "pytest_command": "py -3 -m pytest -q tests/test_dynamic_nale_alpha.py -p no:cacheprovider",
+  "pytest_result": "9 passed in 2.22s",
+  "independent_formula_result": "calibrator counterexample confirmed; existing test suite misses it",
+  "new_quality_gates_run": false,
+  "real_backtest_completed": false,
+  "raw_or_stable_quantitative_outputs_replaced": false,
+  "remote_handoff_verified": false,
+  "remote_limitation": "raw.githubusercontent.com transport connection closed; used local same-path handoff",
+  "document_hashes": {
+    "specs\\contest-2026\\week1-recovery-data-model.md": "154813c25bfe6b785cabc27a66f9bf1d16298a12b72b57f6c1d2441d9b4f3376",
+    "specs\\contest-2026\\week1-recovery-plan.md": "15c6f41c8d305356f3b5cef4386349a5acb297839ab64c15afad3cace4afe435",
+    "specs\\contest-2026\\week1-recovery-quickstart.md": "762646b7a7f3735a717564a85e8dcc6f18a23e511e159a9d974a43ba31444bea",
+    "specs\\contest-2026\\week1-recovery-research.md": "522694020fbcb76e5d336a68cec5fe47cfaa430534d94db91cb840c9d1d0f85e",
+    "specs\\contest-2026\\contracts\\week1-recovery.md": "a2aec351d7c1bdd01607c9dd7918f79fb1eaaebb7c10682c3bd6150691a3213d",
+    "reports\\tables\\nale_alpha_week1\\recovery-audit-20260910\\data_audit.md": "be6d122ba12ba43a70a7a868877c352d10f0f2c78084d67b6b035280d908397f",
+    "reports\\tables\\nale_alpha_week1\\recovery-audit-20260910\\reproduce.md": "a55fa1ec744dfd1083dac6d894a2be1690d0a8366b36ef3cd88070b72be52a17",
+    "reports\\tables\\nale_alpha_week1\\recovery-audit-20260910\\validation_report.md": "b49b9cfa9e8f8e721fbf7672042f7b419d89a32e9c9ff1ec9ce184749e040dfc"
+  }
+}

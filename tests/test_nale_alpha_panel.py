@@ -49,7 +49,7 @@ def test_validate_keeps_leading_zero_and_rejects_future_information():
     with pytest.raises(ValueError, match="duplicate"):
         validate_nale_panel(duplicate, columns)
     bad_code = frame.copy()
-    bad_code.loc[0, "code"] = 1
+    bad_code.loc[0, "code"] = "00001"
     with pytest.raises(ValueError, match="six-digit"):
         validate_nale_panel(bad_code, columns)
     future = frame.copy()

@@ -1,0 +1,13 @@
+quantile,universe,ann_ret_pct,ann_vol_pct,sharpe,mdd_pct,calmar,turnover_pct
+Top/Bot 20%,full,-1.39,4.85,-0.26,9.25,-0.15,0.0
+Top/Bot 20%,student_A,-0.73,8.51,-0.04,9.89,-0.07,0.0
+Top/Bot 20%,student_B,6.74,11.83,0.61,15.94,0.42,0.0
+Top/Bot 20%,student_C,2.01,11.63,0.23,13.91,0.14,0.0
+Top/Bot 10%,full,2.16,6.06,0.38,7.08,0.31,0.0
+Top/Bot 10%,student_A,-4.08,9.87,-0.37,19.29,-0.21,0.0
+Top/Bot 10%,student_B,10.74,12.78,0.86,12.43,0.86,0.0
+Top/Bot 10%,student_C,5.64,11.42,0.54,9.39,0.6,0.0
+Top/Bot 5%,full,5.84,7.25,0.82,7.42,0.79,0.0
+Top/Bot 5%,student_A,-8.37,12.66,-0.63,29.07,-0.29,0.0
+Top/Bot 5%,student_B,12.46,12.6,0.99,8.51,1.46,0.0
+Top/Bot 5%,student_C,9.58,10.31,0.94,7.75,1.24,0.0

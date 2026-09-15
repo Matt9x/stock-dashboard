@@ -1,0 +1,30 @@
+{
+  "ref": "origin/pr/4",
+  "commit": "dd9476178a76e3e59f6e888e5c3ae1c702cd4ee2",
+  "files": [
+    {
+      "repository_path": "data/task_split/student_b/sources/csmar_raw/aiq_acc_info_dis_time_y.csv",
+      "local_path": "data\\raw\\pr_sources\\pr4-dd94761\\aiq_acc_info_dis_time_y.csv",
+      "sha256": "d515af472944a20bbab10559c10c599cd64e8b82ac3d0abe2f62c29269df9d3e",
+      "bytes": 11630
+    },
+    {
+      "repository_path": "data/task_split/student_b/sources/csmar_raw/fi_t10.csv",
+      "local_path": "data\\raw\\pr_sources\\pr4-dd94761\\fi_t10.csv",
+      "sha256": "676ea83effb0ff3602db318d24604c0fd9d095f243856666f0605dcb7044eb7b",
+      "bytes": 64272
+    },
+    {
+      "repository_path": "data/task_split/student_b/sources/csmar_raw/fi_t5.csv",
+      "local_path": "data\\raw\\pr_sources\\pr4-dd94761\\fi_t5.csv",
+      "sha256": "932ccdfd2268e592652596cae1571a8bdc945fbce3f9199671b289ebf8d94634",
+      "bytes": 78489
+    },
+    {
+      "repository_path": "data/task_split/student_b/sources/csmar_raw/trd_fward_quotation.csv",
+      "local_path": "data\\raw\\pr_sources\\pr4-dd94761\\trd_fward_quotation.csv",
+      "sha256": "b818d4cf7301ac42b8d25694132b79e371c6a6152b5cb62eab0e03f26590f05b",
+      "bytes": 3832799
+    }
+  ]
+}

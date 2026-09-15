@@ -64,6 +64,84 @@ def _bounded_sigmoid(u: np.ndarray) -> np.ndarray:
     return result
 
 
+def normalize_network(adjacency: np.ndarray, size: int | None = None) -> np.ndarray:
+    """权威的行归一化实现（唯一入口，供网络工厂与传播层共用）。
+
+    * 邻接矩阵必须为方阵、有限、非负；行和 > 0 的行按行和缩放；
+    * 行和 = 0 的孤立行置为**自环**（``W[i, i] = 1``），即"无邻居 ⇒ N = S0"；
+    * 本函数只做归一化，不做阈值/稀疏化，也不接受负权重。
+
+    Parameters
+    ----------
+    adjacency : np.ndarray
+        原始邻接矩阵（N×N）。
+    size : int | None
+        可选的期望阶数；给定时会与矩阵阶数校验。
+
+    Returns
+    -------
+    np.ndarray
+        行归一化（孤立行为自环）的矩阵，浮点新数组，不修改入参。
+    """
+    matrix = np.asarray(adjacency, dtype=np.float64)
+    if matrix.ndim != 2 or matrix.shape[0] != matrix.shape[1]:
+        raise ValueError("adjacency must be an N x N matrix")
+    if size is not None and matrix.shape[0] != int(size):
+        raise ValueError("adjacency size does not match the declared universe")
+    return _normalize_network(matrix, matrix.shape[0])
+
+
+def propagate_nale_vectorized(
+    S0: np.ndarray,
+    W_norm: np.ndarray,
+    alpha: np.ndarray | float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """唯一权威的向量化 NALE 传播核（M1 收敛结果，规则 §8-V4）。
+
+    语义与原 `src/pricing/dynamic_nale_alpha.propagate_nale` 完全一致：
+    ``S = S0 + alpha * ((S0 @ W.T) - S0)``，输入校验规则如下：
+
+    * ``S0`` 一维或二维、有限；``W_norm`` 为 ``(n, n)`` 有限非负方阵，且
+      每行行和要么≈1（已归一化），要么=0（孤立行，会被置为自环）；
+    * ``alpha`` 标量或按资产广播的向量，取值须在 ``[0, 1]``。
+
+    Parameters
+    ----------
+    S0 : np.ndarray
+        自有得分向量（或批处理矩阵）。
+    W_norm : np.ndarray
+        行归一化（或全零孤立行）的邻接矩阵；本函数**不再二次归一化**。
+    alpha : np.ndarray | float
+        传播系数（标量或按资产广播）。
+
+    Returns
+    -------
+    tuple[np.ndarray, np.ndarray, np.ndarray]
+        ``(S, N, D)``：传播后得分、邻居聚合 ``N = S0 @ W.T``、差分 ``D = N - S0``。
+    """
+    s = np.asarray(S0, dtype=float)
+    w = np.asarray(W_norm, dtype=float)
+    a = np.asarray(alpha, dtype=float)
+    if not (np.isfinite(s).all() and np.isfinite(w).all() and np.isfinite(a).all()):
+        raise ValueError("S0, W and alpha must all be finite")
+    if s.ndim not in (1, 2) or w.shape != (s.shape[-1], s.shape[-1]):
+        raise ValueError("S0 and W shapes do not align")
+    if np.any(w < 0) or np.any((a < 0) | (a > 1)):
+        raise ValueError("W must be nonnegative and alpha must be in [0,1]")
+    sums = w.sum(1)
+    if not np.all(np.isclose(sums, 1) | (sums == 0)):
+        raise ValueError("W must be row-normalized")
+    w = w.copy()
+    isolated = np.flatnonzero(sums == 0)
+    w[isolated, isolated] = 1
+    n = s @ w.T
+    d = n - s
+    output = s + a * d
+    if output.shape != s.shape:
+        raise ValueError("alpha broadcasting changed the score shape")
+    return output, n, d
+
+
 def propagate_nale(
     codes: Sequence[str],
     s0: Sequence[float],
@@ -122,6 +200,9 @@ def propagate_nale(
     neighbor_score = network @ self_score
     difference = neighbor_score - self_score
     score = self_score + alpha * difference
+    # 与权威核的一致性自证（等式恒成立；不是运行时校验，仅防未来改写时静默漂移）
+    core_score, core_n, core_d = propagate_nale_vectorized(self_score, network, alpha)
+    assert np.array_equal(score, core_score) and np.array_equal(neighbor_score, core_n) and np.array_equal(difference, core_d)
     if not np.isfinite(score).all():
         raise ValueError("propagated score overflowed")
     return NALEAlphaResult(

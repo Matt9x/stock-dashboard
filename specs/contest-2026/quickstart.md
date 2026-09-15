@@ -1,5 +1,7 @@
 # 快速入门：Rainbow-FinGPT 策略增强与学术创新
 
+> 2026-09-10 当前Week1接续命令见 [week1-recovery-quickstart.md](week1-recovery-quickstart.md)；旧MVP不能作为无前视实证。
+
 **项目**：Rainbow-FinGPT 提升计划  
 **目标读者**：开发者、研究人员  
 **预计时间**：30 分钟
@@ -447,3 +449,45 @@ if adf_result[1] > 0.05:
 - 数据是否有大量缺失值（触发额外的插补计算）
 - 是否未启用并行（`n_jobs=-1`）
 - 磁盘 I/O 是否成为瓶颈（使用 SSD）
+
+---
+
+## 8. Week 1 专项：十维 PCA 动态 NALE 算法运行与测试指南
+
+### 8.1 快速运行五版本评估流水线
+
+```bash
+# 执行 Week 1 动态 NALE MVP 评估（B0, B1, V1, V2, V3）
+python scripts/evaluate_nale_alpha_mvp.py
+```
+
+### 8.2 快速运行独立单元测试与验证清单
+
+```bash
+# 运行动态 NALE 核心断言测试
+python -m pytest -q tests/test_dynamic_nale_alpha.py
+```
+
+### 8.3 核心指标交付产物位置
+
+- 演进对比表：`reports/tables/nale_alpha_week1/mvp/version_comparison.csv`
+- 月度权重变化：`reports/tables/nale_alpha_week1/mvp/monthly_weights.csv`
+- 详细学术评估报告：`reports/tables/nale_alpha_week1/mvp/mvp_evolution_report.md`
+
+### 8.4 统一评测与审计 CLI (`scripts/evaluate_nale_alpha.py`)
+
+打通 PR #7 架构的统一入口 CLI，提供数据因果审计门禁与端到端产物导出：
+
+```bash
+# 1. 默认严格因果审计（未认证输入数据严格 Fail-Closed，退出码 2，输出 JSON 审计报告）
+python scripts/evaluate_nale_alpha.py --config config/experiments/nale_alpha_week1.json --run-id prod-run-001
+
+# 2. 仅运行数据门禁审计（不进入滚动回测）
+python scripts/evaluate_nale_alpha.py --config config/experiments/nale_alpha_week1.json --run-id audit-check-001 --audit-only
+
+# 3. 运行集成测试与冒烟测试夹具（输出物理隔离至 research-outputs/，全套 11 份标准合规产物）
+python scripts/evaluate_nale_alpha.py --config config/experiments/nale_alpha_week1.json --run-id smoke-001 --allow-fixture --smoke
+
+# 4. 执行 CLI 专用自动化测试套件
+python -m pytest tests/test_evaluate_nale_alpha_cli.py -v
+```

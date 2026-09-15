@@ -1,4 +1,6 @@
-﻿# 实现计划：Rainbow-FinGPT 核心代码与架构系统级优化
+# 实现计划：Rainbow-FinGPT 核心代码与架构系统级优化
+
+> 2026-09-10 最新接续入口：[Week1 Antigravity 接续计划](week1-recovery-plan.md)。独立审计发现旧MVP存在特征、标签与交易前视，真实MVP未完成；接续按该计划修复，旧绩效不作为有效实证。以下总体计划保留历史上下文。
 
 **分支**：`contest-2026` | **日期**：2026-09-04 | **规格**：`specs/contest-2026/spec.md`  
 **输入**：来自 `specs/contest-2026/spec.md` 的功能规格与 `specs/contest-2026/gap-analysis.md` 完成度差距分析
@@ -133,3 +135,19 @@ src/
 | 引入 `factor_orthogonalization.py` | 矩阵投影与残差回归 | 解决立新能源案例“高收益但 Alpha 不显著”的硬缺陷，必须证明超额收益不是风格暴露 | 直接用原始因子打分：无法向评委证明纯特质 Alpha，学术硬伤 |
 | 解耦 `build_ranking.py` | 拆分 58KB 巨型脚本 | 脚本包含 1200+ 行混乱业务，修改维护极易引发未定义行为 | 保持现状单体脚本：代码评审和后期扩展风险过高 |
 | 统一 DAG 注入动态状态机 | 跨模块状态级联 | 使得模拟盘和回测能自动根据大盘牛熊调整仓位系数 | 硬编码固定 100% 仓位：在熊市震荡期无法有效压制最大回撤 |
+
+---
+
+## 当前冲刺附录：Week1 十维 PCA 动态赋权
+
+本次用户请求对应的可执行计划已拆分为 [`pca-next-plan.md`](D:/R-FinGPTv2（国创版本）/specs/contest-2026/pca-next-plan.md)。该计划承接 Work1 已完成的清洗与一次 PCA 提取，聚焦滚动训练、去除常量/重复列、PC1…PCk 消融、真实未来收益样本外验证及基准保护线。
+
+配套工件：
+
+- [`pca-research.md`](D:/R-FinGPTv2（国创版本）/specs/contest-2026/pca-research.md)
+- [`pca-data-model.md`](D:/R-FinGPTv2（国创版本）/specs/contest-2026/pca-data-model.md)
+- [`pca-quickstart.md`](D:/R-FinGPTv2（国创版本）/specs/contest-2026/pca-quickstart.md)
+- [`contracts/pca_pipeline.md`](D:/R-FinGPTv2（国创版本）/specs/contest-2026/contracts/pca_pipeline.md)
+- [`reports/assumptions.md`](D:/R-FinGPTv2（国创版本）/reports/assumptions.md)
+
+当前实施以 [Week1 代码 Agent 任务书](week1-nale-alpha-handoff.md) 为准。用户已确认主实验为传播系数动态赋权，采用回归学习、全池共享月度更新、训练样本时间衰减，先 MVP 后全量验证。旧 PCA 附录只保留讨论历史。

@@ -1,5 +1,7 @@
 # 数据模型：策略增强与学术创新
 
+> 2026-09-10 当前Week1接续数据模型见 [week1-recovery-data-model.md](week1-recovery-data-model.md)，以下实体保留历史。
+
 **项目**：Rainbow-FinGPT 提升计划  
 **日期**：2026-09-01  
 **阶段**：1 - 数据模型设计
@@ -356,4 +358,60 @@ data/
 │   ├── storage/orthogonal_factors.h5
 │   ├── gold/orthogonal_factors.h5
 │   └── green_energy/orthogonal_factors.h5
+```
+
+---
+
+## 7. Week 1 专项：十维 PCA 动态 NALE 数据模型
+
+### 7.1 核心实体定义
+
+#### PCA10DFeature (十维 PCA 标准化特征实体)
+```python
+@dataclass
+class PCA10DFeature:
+    stock_code: str          # 严格 6 位字符（如 "000001", "688525"）
+    date: str                # YYYY-MM-DD
+    pc_scores: list[float]   # 10 维浮点数组 [PC1, ..., PC10]，标准化为均值0方差1
+```
+
+#### PublicCalibrator (公共线性校准器)
+```python
+@dataclass
+class PublicCalibrator:
+    calibrated_at: str       # 初始训练校准时间
+    a: float                 # 截距项
+    c: float                 # 斜率项 (严格 c >= 0.005)
+    var_y_train: float       # 训练标签方差 (用于损失无量纲化)
+```
+
+#### DynamicNALEPrediction (动态 NALE 预测截面记录)
+```python
+@dataclass
+class DynamicNALEPrediction:
+    stock_code: str          # 股票代码 (保留前导零)
+    trade_date: str          # 交易日
+    S0: float                # 独立打分
+    N: float                 # 网络聚合打分 (W_norm @ S0)
+    D: float                 # 差分信号 (N - S0)
+    u: float                 # 门控未激活得分 (b + sum(w_k * z_k))
+    alpha_nale: float        # 动态传播混合比重 (0.05 + 0.70 * sigmoid(u))
+    S: float                 # 最终 NALE 综合打分 (S0 + alpha * D)
+    y_hat: float             # 预测 5 日前向超额收益 (a + c * S)
+    y_true: float            # 真实 5 日前向超额收益
+    model_version: str       # B0, B1, V1, V2, V3, V4, V5
+```
+
+#### RebalanceSnapshot (月度重平衡权重与状态快照)
+```python
+@dataclass
+class RebalanceSnapshot:
+    rebalance_date: str      # 调仓执行日
+    model_version: str       # V1~V5
+    b: float                 # 门控截距项
+    w_vector: list[float]    # 10 维门控斜率向量
+    w_l2_norm: float         # 权重 L2 范数
+    g_regime: float | None   # 市场状态指标 (MA20/MA60 - 1)
+    q_reliability: float | None # 历史网络可靠性指标
+    opt_loss: float          # 优化收敛损失
 ```

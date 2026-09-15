@@ -1,0 +1,11 @@
+Requirement_ID,Source_Document,Section_Page,Original_Text,Metric_Formula,Acceptance_Method,Verification_Status
+REQ-01,week1-nale-alpha-handoff.md,Section 1,把 NALE 中固定的传播混合系数 alpha_nale=0.4 改成由十维 PCA 输入决定,alpha=0.05+0.70*sigmoid(u),独立单元测试 test_criterion_1_bounds_and_zero_neutral,VERIFIED_PASS
+REQ-02,week1-nale-alpha-handoff.md,Section 3,统一公式：u=b+sum(w_k*z_k); 两股S0=(0.2 0.8) alpha=0.4->S=(0.44 0.56),S=S0+alpha*(W*S0-S0),独立单元测试 test_criterion_2_two_stock_hand_calculation,VERIFIED_PASS
+REQ-03,week1-nale-alpha-handoff.md,Section 4,在当前训练窗用 B0 得分拟合公共校准器 a+cS (c>=0) 冻结共用,y_hat=a+c*S,动态校准函数 calibrate_public_calibrator (c>=0.005),VERIFIED_PASS
+REQ-04,week1-nale-alpha-handoff.md,Section 5,五版本体系：B0(固定0.4) B1(事件规则) V1(静态10D) V2(月度滚动) V3(时间衰减) V4(状态条件) V5(可靠性),模型版本矩阵全量回测,全版本 walk-forward 滚动回测与 version_comparison.csv,VERIFIED_PASS
+REQ-05,week1-nale-alpha-handoff.md,Section 7,V3半衰期H默认60日：omega_t=2^(-age/H),omega_t=2^(-age/60),独立单元测试 test_criterion_6_time_decay_half_life,VERIFIED_PASS
+REQ-06,week1-nale-alpha-handoff.md,Section 8,截面 Spearman Rank IC 与配对检验 t 统计量,IC=corr(rank(S) rank(y)),逐日截面计算与配对 t 检验 (p<0.001),VERIFIED_PASS
+REQ-07,week1-nale-alpha-handoff.md,Section 10,预测对 w_k 导数与有限差分对齐,dy/dw_k=c*D*0.70*s'*(1-s')*z_k,独立单元测试 test_criterion_4_finite_difference_gradient_check,VERIFIED_PASS
+REQ-08,week1-nale-alpha-handoff.md,Section 10,同时翻转某PC与对应全部系数输出不变,f(-z -w)=f(z w),独立单元测试 test_criterion_5_sign_flip_invariance,VERIFIED_PASS
+REQ-09,week1-nale-alpha-handoff.md,Section 10,孤立节点处理：W=I 时 S=S0 与 alpha 无关,D_i=0 -> S_i=S0_i,独立单元测试 test_criterion_7_isolated_node_handling,VERIFIED_PASS
+REQ-10,week1-nale-alpha-handoff.md,Section 10,隔离产物交付：version_comparison.csv / monthly_weights.csv / 报告,全套规范输出物,产物落地于 reports/tables/nale_alpha_week1/mvp/,VERIFIED_PASS

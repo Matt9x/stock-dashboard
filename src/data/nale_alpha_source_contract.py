@@ -72,7 +72,7 @@ def _valid_dates(frame: pd.DataFrame, column: str, name: str, issues: list[str])
 
 def _valid_timestamps(frame: pd.DataFrame, column: str, name: str, issues: list[str]) -> pd.Series | None:
     raw = frame[column]
-    if raw.isna().any() or not raw.astype(str).str.contains(r"(Z|[+-]\d{2}:\d{2})$", regex=True).all():
+    if raw.isna().any() or not raw.astype(str).str.contains(r"(?:Z|[+-]\d{2}:\d{2})$", regex=True).all():
         issues.append(f"{name}.{column} must have an explicit timezone")
         return None
     parsed = pd.to_datetime(raw, utc=True, errors="coerce")

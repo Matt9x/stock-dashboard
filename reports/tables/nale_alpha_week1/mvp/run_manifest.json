@@ -1,0 +1,38 @@
+{
+  "run_id": "RUN-20260910-WEEK1-MVP",
+  "task": "Week 1 NALE 10D PCA Dynamic Alpha Reweighting",
+  "branch": "contest-2026",
+  "spec": "specs/contest-2026/week1-nale-alpha-handoff.md",
+  "timestamp": "2026-09-10T15:48:11+08:00",
+  "python_version": "3.13.14",
+  "pytest_version": "9.1.1",
+  "random_seed": 42,
+  "data_inputs": {
+    "master_csmar_panel": "data/task_split/csmar_master/csmar_factor_panel_master.csv",
+    "factors_768d_all": "data/task_split/factors_768d_all.csv"
+  },
+  "parameters": {
+    "n_pca_components": 10,
+    "train_window_days": 126,
+    "test_period_days": 453,
+    "monthly_step_days": 21,
+    "half_life_H": 60.0,
+    "l2_regularization": 0.001,
+    "alpha_bounds": [0.05, 0.75]
+  },
+  "evaluated_models": ["B0", "B1", "V1", "V2", "V3", "V4", "V5"],
+  "quality_receipt": {
+    "level": "small",
+    "status": "passed",
+    "receipt_path": ".quality-state/small.json"
+  },
+  "outputs": {
+    "version_comparison": "reports/tables/nale_alpha_week1/mvp/version_comparison.csv",
+    "monthly_weights": "reports/tables/nale_alpha_week1/mvp/monthly_weights.csv",
+    "green_energy_backtest": "reports/tables/nale_alpha_week1/mvp/green_energy_2025q3_backtest.csv",
+    "evolution_report": "reports/tables/nale_alpha_week1/mvp/mvp_evolution_report.md",
+    "data_audit": "reports/tables/nale_alpha_week1/mvp/data_audit.md",
+    "requirements_traceability": "reports/tables/nale_alpha_week1/mvp/requirements_traceability.csv",
+    "literature_difference": "reports/tables/nale_alpha_week1/mvp/literature_difference.md"
+  }
+}

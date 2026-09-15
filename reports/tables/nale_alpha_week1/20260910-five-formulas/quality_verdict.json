@@ -1,0 +1,125 @@
+{
+  "verdict": "block",
+  "reasons": [
+    {
+      "source": "heavy",
+      "signal": "heavy",
+      "severity": "block",
+      "file": "Python 依赖一致性",
+      "line": 0,
+      "hint": "magika 0.6.3 has requirement onnxruntime<=1.20.1; sys_platform == \"win32\", but you have onnxruntime 1.29.0."
+    },
+    {
+      "source": "heavy",
+      "signal": "heavy",
+      "severity": "block",
+      "file": "股票全量回归测试",
+      "line": 0,
+      "hint": ".F...................................................................... [  6%]\n..................................................................F..... [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 41%]\n...................."
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_analysis.py",
+      "line": 360,
+      "hint": "assert-is-not-none: assertIsNotNone(result)"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_analysis.py",
+      "line": 370,
+      "hint": "assert-is-not-none: assertIsNotNone(result)"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_analysis.py",
+      "line": 379,
+      "hint": "assert-is-not-none: assertIsNotNone(result)"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_mut_runner.py",
+      "line": 35,
+      "hint": "assert-true-bare: assertTrue(res['passed'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_mut_runner.py",
+      "line": 42,
+      "hint": "assert-true-bare: assertTrue(res['passed'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_mut_runner.py",
+      "line": 53,
+      "hint": "assert-true-bare: assertTrue(res['passed'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_mut_runner.py",
+      "line": 60,
+      "hint": "assert-true-bare: assertTrue(res['passed'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_mut_runner.py",
+      "line": 67,
+      "hint": "assert-true-bare: assertTrue(ok)"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_mut_runner.py",
+      "line": 96,
+      "hint": "assert-true-bare: assertTrue(res['passed'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_prediction_accuracy_harness.py",
+      "line": 80,
+      "hint": "assert-true-bare: assertTrue(math.isclose(f1[name][70], f2[name][70], rel_tol=1e-09, abs_tol=1e-12) or (math.isnan(f1[name][70]) and math.isnan(f2[name][70])))"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_prediction_accuracy_harness.py",
+      "line": 100,
+      "hint": "assert-is-not-none: assertIsNotNone(cell['accuracy'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_prediction_accuracy_harness.py",
+      "line": 112,
+      "hint": "assert-is-not-none: assertIsNotNone(r['ret1_reversal__h1']['accuracy'])"
+    },
+    {
+      "source": "weak-assert",
+      "signal": "weak-assert",
+      "severity": "warn",
+      "file": "D:\\R-FinGPTv2（国创版本）\\tests\\test_prediction_accuracy_harness.py",
+      "line": 169,
+      "hint": "assert-is-not-none: assertIsNotNone(cell['hit_rate'])"
+    }
+  ]
+}

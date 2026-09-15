@@ -1,0 +1,9 @@
+Model,Cumulative_Return_2025Q3,Annualized_Sharpe,Max_Drawdown,Outperformed_ETF
+Green Energy ETF Benchmark,20.50%,4.27,3.71%,BENCHMARK
+B0 (旧版固定传播),105.82%,8.07,2.94%,YES
+B1 (传统规则动态),105.82%,8.07,2.94%,YES
+V1 (十维PCA静态回归),104.44%,7.97,2.94%,YES
+V2 (十维PCA月度滚动),102.47%,7.85,3.73%,YES
+V3 (十维PCA时效增强),103.48%,7.83,3.73%,YES
+V4 (十维PCA市场状态条件权重),104.17%,7.85,3.72%,YES
+V5 (十维PCA网络可靠性与状态双条件权重),99.35%,7.7,2.84%,YES

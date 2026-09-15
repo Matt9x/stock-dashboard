@@ -13,3 +13,8 @@
 ## 3. Agent 独立复核
 
 不能把门禁退出码、测试数量或另一个 Agent 的结论当作正确性证明。对股票名称映射、指标公式、评分边界和关键结论，必须使用独立断言、可手算的小样本或独立基准进行复核，并记录局限性。
+
+## 4. 全局记忆与跨 Agent 同步 (Shared Memory)
+
+项目最新全局进展、算法实验记录、网申材料与 PPT 评审意见已同步固化在 [`PROJECT_SHARED_MEMORY.md`](file:///D:/R-FinGPTv2（国创版本）/PROJECT_SHARED_MEMORY.md)。所有 Agent（包括 Codex 和 Antigravity）在推进代码、核对数据口径与整理申报文件时，必须严格参考该文件中的已知事实与评审结论，确保口径一致、版本统一。
+

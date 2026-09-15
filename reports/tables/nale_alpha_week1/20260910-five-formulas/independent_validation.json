@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "prediction_rows": 222264,
+  "fit_snapshots": 77,
+  "label_manual_samples": [
+    {
+      "date": "2025-02-05",
+      "code": "000021",
+      "label": -0.02251087468249291
+    },
+    {
+      "date": "2025-02-05",
+      "code": "002371",
+      "label": -0.016611972924031826
+    },
+    {
+      "date": "2026-08-20",
+      "code": "688981",
+      "label": 0.004102792687248558
+    }
+  ],
+  "checks": [
+    "S and y_hat accounting identities",
+    "alpha range",
+    "entry/exit and mature fitting dates",
+    "independent five-day total-return labels",
+    "all daily cross-sectional Spearman IC and ICIR",
+    "net NAV, annualized Sharpe, maximum drawdown from daily returns"
+  ],
+  "fallback_by_version": "{('B0', ''): 20874, ('B0', 'unidentifiable_c'): 16170, ('V1', 'unidentifiable_c_or_D'): 20874, ('V1', 'unidentifiable_c'): 16170, ('V2', ''): 18718, ('V2', 'unidentifiable_c'): 16170, ('V2', 'optimization_failed'): 2156, ('V3', ''): 20874, ('V3', 'unidentifiable_c'): 16170, ('V4', ''): 20874, ('V4', 'unidentifiable_c'): 16170, ('V5', ''): 20874, ('V5', 'unidentifiable_c'): 16170}"
+}

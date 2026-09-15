@@ -8,7 +8,7 @@
     "node_modules", "bug合集", "测试记录", "data"
   ],
   "additional_control_files": [
-    "README.md", "QUALITY_WORKFLOW.md", "项目背书.md", "requirements.txt", "render.yaml", "watchlist.csv", "strategy_pool.csv", "config/strategy_params.json"
+    "README.md", "QUALITY_WORKFLOW.md", "项目背书.md", "requirements.txt", "render.yaml", "watchlist.csv", "strategy_pool.csv", "config/strategy_params.json", "config/data_caliber/csmar_master_close_basis.json"
   ],
   "custom_commands": {
     "small": [

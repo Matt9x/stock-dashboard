@@ -1,0 +1,178 @@
+{
+  "scope": "read-only input and independent numeric audit; not a corrected backtest",
+  "versions": {
+    "python": "3.13.14",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "scikit-learn": "1.9.0",
+    "pytest": "9.1.1"
+  },
+  "input_hashes": {
+    "data/task_split/csmar_master/csmar_factor_panel_master.csv": "0a2daa7134e3defe5d70d11dcfbb09fea4a137212d085d7543e286f41404761f",
+    "data/task_split/factors_768d_all.csv": "e589cc631d60b7aa13b2ed4c6101c636b6d9c5abea2c275ca7a5b345887cb99e",
+    "data/raw/backtest_paper_2024_2026_300stocks/market_prices.csv": "960035b5ec9c3d43850786f2cd5182edf4b779139524e39b2a7a9de6d2b5846a",
+    "src/pricing/dynamic_nale_alpha.py": "4bcdc2ae590acdfc23133362df12a642eb7ea9f811fe5025bea9d622c85e1d45",
+    "scripts/evaluate_nale_alpha_mvp.py": "5f14c98068f9ac26067ff04ac90590c9a059ae589fac6cd2bb931212f9e837cb",
+    "tests/test_dynamic_nale_alpha.py": "53b52c6891f9e2cf140504e33a0b21bc89cf3c066a9bd33642f1cb52dab3922b",
+    "scripts/build_2024_2026_300stocks_backtest.py": "4958791d68fa13477af3b4f6a32b75ef870bd6a4a7695981c9e149de1a502ee2"
+  },
+  "master": {
+    "shape": [
+      192199,
+      22
+    ],
+    "stocks": 299,
+    "dates": 644,
+    "start": "2024-01-02",
+    "end": "2026-08-28",
+    "duplicate_keys": 0,
+    "invalid_codes": 0,
+    "close_missing": 0,
+    "close_nonpositive": 0,
+    "factor_codes_without_master": [
+      "600317"
+    ]
+  },
+  "features": {
+    "shape": [
+      300,
+      780
+    ],
+    "unique_codes": 300,
+    "dimension_count": 768,
+    "finite": true,
+    "centered_rank": 299,
+    "temporal_columns": []
+  },
+  "alternative_market": {
+    "shape": [
+      694,
+      301
+    ],
+    "dates": 694,
+    "start": "2024-01-02",
+    "end": "2026-08-28",
+    "stock_columns": 300,
+    "benchmark_column": "000300.SH",
+    "provenance_status": "confirmed_random_simulation_excluded_from_real_market_evidence",
+    "generator": "scripts/build_2024_2026_300stocks_backtest.py",
+    "seed": 42,
+    "index_max_abs_error": 9.094947017729282e-13,
+    "first_stock_max_abs_error": 4.547473508864641e-13,
+    "calendar": "weekdays_not_exchange_calendar"
+  },
+  "legacy_selection": {
+    "stocks": 40,
+    "codes": [
+      "300750",
+      "002594",
+      "688981",
+      "002415",
+      "002230",
+      "688111",
+      "603986",
+      "688525",
+      "601138",
+      "000063",
+      "000725",
+      "688012",
+      "002371",
+      "603501",
+      "600900",
+      "601985",
+      "600905",
+      "600886",
+      "600011",
+      "600795",
+      "001289",
+      "000591",
+      "601016",
+      "001258",
+      "688223",
+      "601012",
+      "600438",
+      "600036",
+      "002142",
+      "000001",
+      "601398",
+      "601939",
+      "601288",
+      "601988",
+      "601166",
+      "600000",
+      "600016",
+      "601998",
+      "601818",
+      "600015"
+    ],
+    "aligned_dates": 579,
+    "first_prediction": "2024-08-09",
+    "last_prediction": "2026-08-21",
+    "prediction_dates": 453
+  },
+  "independent_checks": {
+    "calibrator_exact_fit": {
+      "expected_a": 0.0,
+      "expected_c": 1.0,
+      "actual_a": -0.5,
+      "actual_c": 2.0,
+      "passes": false
+    },
+    "negative_slope": {
+      "expected_c": 0.0,
+      "actual_c": 0.005,
+      "passes": false
+    },
+    "sigmoid_derivative_at_20": {
+      "analytic": 3.0590213341738715e-07,
+      "finite_difference": 0.0
+    },
+    "zero_gate_alpha": 0.39999999999999997,
+    "two_stock_propagation": [
+      0.44000000000000006,
+      0.56
+    ]
+  },
+  "legacy_artifacts": {
+    "data_audit.md": true,
+    "split_manifest.json": false,
+    "run_manifest.json": true,
+    "monthly_weights.csv": true,
+    "predictions.parquet": false,
+    "version_comparison.csv": true,
+    "paired_differences.csv": false,
+    "requirements_traceability.csv": true,
+    "literature_difference.md": true,
+    "validation_report.md": false
+  },
+  "raw_ac_corpus": {
+    "files": 200,
+    "record_types": {
+      "news": 1971,
+      "announcement": 77254
+    },
+    "publication_year_counts": {
+      "2020": 140,
+      "2021": 25,
+      "2024": 27312,
+      "2025": 29839,
+      "2026": 21909
+    },
+    "min_publication": "2020-01-16 00:00:00",
+    "max_publication": "2026-09-09 00:00:00",
+    "invalid_json": 0,
+    "limitation": "Publication fields do not verify original revision, source truth, availability or complete historical coverage."
+  },
+  "initial_document_hashes": {
+    "specs/contest-2026/week1-nale-alpha-handoff.md": "fbcb80515ff5c3de3a80e63161365440d5185cdc73866a7ebb9bcd40a6d61a18"
+  },
+  "price_basis_audit": {
+    "a_rows_with_ret": 63399,
+    "close_vs_ret_absolute_difference_over_10bp": 308,
+    "a_close_source": "Clsprc unadjusted closing price",
+    "a_ret_source": "Dretwd dividend-reinvestment return",
+    "b_c_basis": "not verified; raw source directory missing according to independent audit",
+    "conclusion": "Do not treat master close as uniformly forward adjusted"
+  }
+}
