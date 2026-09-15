@@ -7,13 +7,13 @@
   "datasets": [
     {
       "id": "snapshot_768d",
-      "input": "data/task_split/factors_768d_all.csv",
+      "input": "data/processed/pc5_component/github-7d63bb4/inputs/factors_768d_all.csv",
       "input_git_blob": "9f5d0d47c91488803af671aefb5db6c8bbc2fbde",
       "kind": "embedding_snapshot",
       "n_components": 10,
       "name_mapping": "data/task_split/universe_300_assigned.csv",
       "name_mapping_git_blob": "f76a3ad489c197f7062d86efc5554a660f1264d2",
-      "previous_variance": "reports/tables/regression_768d/pca_768d_explained_variance.csv",
+      "previous_variance": "data/processed/pc5_component/github-7d63bb4/inputs/pca_768d_explained_variance.csv",
       "previous_variance_git_blob": "800cf2255ec1200f97c94b7bcff7249080aad3e2",
       "limitations": [
         "300行全部标记为local_semantic；是仓库的本地语义特征，未证实为历史LLM embedding。",

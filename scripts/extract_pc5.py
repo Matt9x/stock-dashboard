@@ -31,7 +31,13 @@ def source_info(path: Path, expected_blob: str | None = None) -> dict[str, str]:
     content = path.read_bytes()
     blob = hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
     if expected_blob is not None and blob != expected_blob:
-        raise ValueError(f"Input differs from the pinned GitHub blob: {path}")
+        content_lf = content.replace(b"\r\n", b"\n")
+        blob_lf = hashlib.sha1(f"blob {len(content_lf)}\0".encode() + content_lf).hexdigest()
+        if blob_lf == expected_blob:
+            blob = blob_lf
+            content = content_lf
+        else:
+            raise ValueError(f"Input differs from the pinned GitHub blob: {path}")
     return {
         "path": str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
         "git_blob": blob,
