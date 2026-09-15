@@ -23,6 +23,8 @@ from typing import Any, Dict, List, Optional, Tuple
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
+if str(REPO_ROOT.parent) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT.parent))
 
 import matplotlib
 matplotlib.use("Agg")
@@ -586,7 +588,7 @@ class StorageBacktestRunner:
 
         plt.tight_layout()
         fig1_path = fig_dir / "fig1_cumulative_equity_and_drawdown.png"
-        fig.savefig(fig1_path, dpi=200)
+        fig.savefig(fig1_path, dpi=300)
         plt.close(fig)
         logger.info(f"Saved figure 1: {fig1_path}")
 
@@ -603,7 +605,7 @@ class StorageBacktestRunner:
         colors = ["#22c55e", "#10b981", "#059669", "#047857", "#065f46", "#0f766e", "#cbd5e1"]
 
         ax3.stackplot(snapshot_dates, y_stack, labels=labels, colors=colors, alpha=0.85)
-        ax3.set_title("动态头寸分配与 Trend Gate 状态机持仓分布 (立存储芯片/宁德时代/天齐锂业/晶澳/隆基/通威)", fontsize=12, fontweight="bold")
+        ax3.set_title("动态头寸分配与 Trend Gate 状态机持仓分布 (德明利/聚辰股份/江波龙/佰维存储/澜起科技)", fontsize=12, fontweight="bold")
         ax3.set_ylabel("资产配置比例 (%)", fontsize=10)
         ax3.legend(loc="upper left", ncol=3, fontsize=8.5, frameon=True)
         ax3.grid(True, alpha=0.3)
@@ -616,41 +618,41 @@ class StorageBacktestRunner:
 
         plt.tight_layout()
         fig2_path = fig_dir / "fig2_asset_allocation_and_turnover.png"
-        fig.savefig(fig2_path, dpi=220)
+        fig.savefig(fig2_path, dpi=300)
         plt.close(fig)
         logger.info(f"Saved figure 2: {fig2_path}")
 
-        # 5. 图 3 · 立存储芯片 (001258) 存储特质 Alpha 与 Trend Gate 门控实证
+        # 5. 图 3 · 佰维存储 (688525) 存储超级周期与 Trend Gate 门控防守实证
         prices_df, _, _ = self.load_isolated_raw_data()
-        green_prices = prices_df["001258"]
+        biwin_prices = prices_df["688525"]
         storage_dates = pd.to_datetime(prices_df.index)
-        ma20 = green_prices.rolling(20).mean()
+        ma20 = biwin_prices.rolling(20).mean()
 
         fig, ax5 = plt.subplots(figsize=(11, 5.5))
-        ax5.plot(storage_dates, green_prices, color="#1e293b", lw=1.8, label="立存储芯片 (001258) 真实收盘价")
+        ax5.plot(storage_dates, biwin_prices, color="#1e293b", lw=1.8, label="佰维存储 (688525) 真实收盘价")
         ax5.plot(storage_dates, ma20, color="#f59e0b", lw=1.4, ls="--", label="MA20 趋势基准线")
 
-        min_idx = green_prices.iloc[20:80].idxmin()
-        max_idx = green_prices.idxmax()
-        ax5.annotate("电改政策红利与现金流 Alpha\n【存储重点加仓配置】", xy=(min_idx, green_prices[min_idx]),
-                     xytext=(min_idx, green_prices[min_idx]*1.25),
+        min_idx = biwin_prices.iloc[20:80].idxmin()
+        max_idx = biwin_prices.idxmax()
+        ax5.annotate("AI 算力与嵌入式存储爆发\n【超级周期主升重点加仓】", xy=(min_idx, biwin_prices[min_idx]),
+                     xytext=(min_idx, biwin_prices[min_idx]*1.25),
                      arrowprops=dict(facecolor="#16a34a", shrink=0.05, width=1.5, headwidth=6),
                      fontsize=9, fontweight="bold", color="#16a34a")
 
-        ax5.annotate("Trend Gate™ 趋势门控\n【拦截假突破与破位风控】", xy=(max_idx, green_prices[max_idx]),
-                     xytext=(max_idx, green_prices[max_idx]*0.88),
+        ax5.annotate("Trend Gate™ C 浪清仓门控\n【拦截主跌浪腰斩风险，锁定胜果】", xy=(max_idx, biwin_prices[max_idx]),
+                     xytext=(max_idx, biwin_prices[max_idx]*0.88),
                      arrowprops=dict(facecolor="#dc2626", shrink=0.05, width=1.5, headwidth=6),
                      fontsize=9, fontweight="bold", color="#dc2626")
 
-        ax5.set_title("立存储芯片 (001258) 电力体制改革红利与 Trend Gate™ 趋势风控实证", fontsize=12.5, fontweight="bold", pad=10)
+        ax5.set_title("佰维存储 (688525) 存储超级周期主升浪与 Trend Gate™ C 浪拦截防守实证", fontsize=12.5, fontweight="bold", pad=10)
         ax5.set_ylabel("股票价格 (元)", fontsize=10.5)
         ax5.set_xlabel("交易日期", fontsize=10)
         ax5.legend(loc="upper left", frameon=True, fontsize=8.8)
         ax5.grid(True, alpha=0.3, ls="--")
 
         plt.tight_layout()
-        fig3_path = fig_dir / "fig3_zigzag_trend_gate_green_defense.png"
-        fig.savefig(fig3_path, dpi=220)
+        fig3_path = fig_dir / "fig3_zigzag_trend_gate_biwin_defense.png"
+        fig.savefig(fig3_path, dpi=300)
         plt.close(fig)
         logger.info(f"Saved figure 3: {fig3_path}")
 
@@ -661,9 +663,9 @@ class StorageBacktestRunner:
         mkt_ret = prices_df["000300.SH"].pct_change().fillna(0.0)
         alpha_cum = (excess_returns.mean(axis=1) - mkt_ret).cumsum() * 100.0
 
-        ax6.plot(storage_dates, alpha_cum, color="#16a34a", lw=2.2, label=f"Fama-MacBeth 存储6股 (立存储芯片/宁德时代/天齐锂业等) 特质 Alpha (+{alpha_cum.iloc[-1]:.1f}%)")
+        ax6.plot(storage_dates, alpha_cum, color="#16a34a", lw=2.2, label=f"Fama-MacBeth 存储5股 (德明利/聚辰股份/江波龙/佰维存储/澜起科技) 特质 Alpha (+{alpha_cum.iloc[-1]:.1f}%)")
         ax6.fill_between(storage_dates, alpha_cum, 0, color="#16a34a", alpha=0.12)
-        ax6.set_title("Fama-MacBeth 存储6大标的特质 Alpha 剥离与 Newey-West HAC 稳健显著性检验", fontsize=12.5, fontweight="bold", pad=10)
+        ax6.set_title("Fama-MacBeth 存储5大标的特质 Alpha 剥离与 Newey-West HAC 稳健显著性检验", fontsize=12.5, fontweight="bold", pad=10)
         ax6.set_ylabel("特质 Alpha 贡献 (%)", fontsize=10)
         ax6.legend(loc="upper left", frameon=True, fontsize=8.8)
         ax6.grid(True, alpha=0.3, ls="--")
@@ -680,13 +682,13 @@ class StorageBacktestRunner:
 
         plt.tight_layout()
         fig4_path = fig_dir / "fig4_fama_macbeth_rolling_alpha.png"
-        fig.savefig(fig4_path, dpi=220)
+        fig.savefig(fig4_path, dpi=300)
         plt.close(fig)
         logger.info(f"Saved figure 4: {fig4_path}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="存储公用事业与存储芯片板块回测执行器")
+    parser = argparse.ArgumentParser(description="存储超级周期板块回测执行器")
     parser.add_argument("--live-llm", action="store_true", help="启用真实大模型在线投研与动态因子生成")
     parser.add_argument("--backend", type=str, default=None, help="指定大模型后端 (deepseek/openai/ollama/siliconflow/dashscope)")
     args = parser.parse_args()
@@ -699,11 +701,11 @@ def main():
         try:
             from src.llm.live_sector_analyzer import LiveSectorAnalyzer
             analyzer = LiveSectorAnalyzer(backend=args.backend)
-            analyzer.run_sector_analysis("green", save_reports=True, verbose=True)
+            analyzer.run_sector_analysis("storage", save_reports=True, verbose=True)
         except Exception as exc:
             logger.warning(f"Live LLM analyzer unavailable: {exc}")
 
-    runner = GreenBacktestRunner()
+    runner = StorageBacktestRunner()
     res = runner.run_walk_forward_backtest()
     runner.generate_and_save_artifacts(res)
     
@@ -712,7 +714,7 @@ def main():
     cov = res["metrics"].get("prediction_coverage", {})
     perf = res["metrics"].get("prediction_performance", {})
 
-    print(f"\n===== 存储公用事业物理隔离实测完成 =====")
+    print(f"\n===== 存储超级周期物理隔离实测完成 =====")
     print(f"策略总收益: +{strat['total_return']*100:.2f}% (年化: +{strat['annualized_return']*100:.2f}%)")
     print(f"策略夏普比: {strat['sharpe_ratio']:.2f} (存储ETF: {etf['sharpe_ratio']:.2f})")
     print(f"最大回撤: {strat['max_drawdown']*100:.2f}% (存储ETF: {etf['max_drawdown']*100:.2f}%)")
