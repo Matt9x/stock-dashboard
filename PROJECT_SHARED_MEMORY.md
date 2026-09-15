@@ -1,3 +1,8 @@
+> **2026-09-15 PR #6 (SoliloquyRyan/codex/pc5-component) 吸收与适配完成**：
+> 1. **代码合并**：吸收 Commit `fb13cca` 至 `contest-2026`，新增 `src/pricing/pc5_component.py`、`scripts/extract_pc5.py`，更新 `scripts/day2_pca_extraction.py`（彻底消灭保留6/10维时误将最后一个成分命名为 PC5 的缺陷）。
+> 2. **工程适配**：`scripts/extract_pc5.py` 强化 Windows CRLF 换行符与 Git Blob 跨平台比对容错；`config/experiments/pc5_component.json` 锚定至历史输入快照隔离目录，与 M0–M6 清洗后的最新数据层互不污染。
+> 3. **质量验证**：`tests/test_pc5_component.py`（15 passed）与 `tests/test_factor_orthogonalization.py`（7 passed）共 22 项测试 100% 通过；质量门禁 `small` 与 `medium` 当前**双有效**。
+>
 > **2026-09-14 M6 C 组 768 维静态向量【溯源作废】（用户裁定执行）**：
 > 产物 `reports/tables/pca_nale_integration/C_PROVENANCE_INVALIDATION.md`
 > + `tests/test_c_cohort_provenance_invalidation.py`（6 项全绿，把作废变成**可执行断言**）；
