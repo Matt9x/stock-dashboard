@@ -1,3 +1,11 @@
+> **2026-09-16 PR #8 (kkkk0517-pixel/feat(data-A+nale)) 吸收与合并完成**：
+> 1. **代码与数据合并**：通过本地 `--no-ff` 将 PR #8（Commit `0379860`）合入 `contest-2026`（Merge Commit `52749a7`）。
+> 2. **交付物内容**：
+>    - 同学 A CSMAR 原生日频因子面板构建脚本（`scripts/build_csmar_daily_panel_factors.py`），采用 CSMAR `TRD_Dalyr` 原生 `Dretwd`（现金红利再投资总收益率），消除了未复权除权日暴跌痛点与市值千元换手率单位 bug，并通过三重零偏差审计（`工作规划/数据审计报告_同学A_CSMAR日频面板.md`）；
+>    - M4 全周期走步评测真实产物集（`m4-full-run-20260916`，含 `reports/tables/pca_nale_integration/m4-full-run-20260916/` 及图表 `ic_by_variant.png`）；
+> 3. **实证与学术纪律**：全周期 69 个信号日评测忠实反映负面结果（动态门控退化等同于 B0 $\alpha=0.40$，Mean Rank IC=0.0138，Holm $p=1.000$ 不显著），学术道德严谨合规；
+> 4. **质量验证**：回归套件 `tests/test_return_basis.py` 与 `tests/test_evaluate_pca_nale_integration.py` 共 79 项测试 100% 绿灯通过（46.9s）。
+>
 > **2026-09-15 PR #6 (SoliloquyRyan/codex/pc5-component) 吸收与适配完成**：
 > 1. **代码合并**：吸收 Commit `fb13cca` 至 `contest-2026`，新增 `src/pricing/pc5_component.py`、`scripts/extract_pc5.py`，更新 `scripts/day2_pca_extraction.py`（彻底消灭保留6/10维时误将最后一个成分命名为 PC5 的缺陷）。
 > 2. **工程适配**：`scripts/extract_pc5.py` 强化 Windows CRLF 换行符与 Git Blob 跨平台比对容错；`config/experiments/pc5_component.json` 锚定至历史输入快照隔离目录，与 M0–M6 清洗后的最新数据层互不污染。
